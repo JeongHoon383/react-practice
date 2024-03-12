@@ -5,7 +5,7 @@ import List from "./components/List";
 
 function App() {
   return (
-    <div className="flex flex-col w-[500px] m-auto gap-[20px]">
+    <div className="flex flex-col w-[500px] m-auto gap-[20px] mt-[20px]">
       <Header />
       <Editor />
       <List />
