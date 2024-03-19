@@ -3,7 +3,7 @@ import "./Editor.css";
 
 const Editor = ({ onCreate }) => {
   const [content, setContent] = useState("");
-  const inputRef = useRef();
+  const contentRef = useRef();
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
@@ -11,27 +11,29 @@ const Editor = ({ onCreate }) => {
 
   const onSubmit = () => {
     if (content === "") {
-      inputRef.current.focus();
+      alert("값을 입력 해주세요");
+      contentRef.current.focus();
       return;
     }
     onCreate(content);
     setContent("");
+    alert("추가 되었습니다");
   };
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
       onSubmit();
     }
-  }; // 엔터키 누르면 버튼이 실행되는 함수
+  };
 
   return (
     <div className="Editor">
       <input
-        onKeyDown={onKeyDown}
-        ref={inputRef}
-        placeholder="새로운 Todo..."
+        ref={contentRef}
         onChange={onChangeContent}
         value={content}
+        onKeyDown={onKeyDown}
+        placeholder="새로운 Todo..."
       />
       <button onClick={onSubmit}>추가</button>
     </div>

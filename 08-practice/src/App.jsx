@@ -23,17 +23,18 @@ const mockData = [
 ];
 
 function App() {
-  const [todo, setTodo] = useState(mockData);
+  const [todos, setTodos] = useState(mockData);
+  const idRef = useRef(1);
 
   const onCreate = (content) => {
     const newTodo = {
-      id: 1,
+      id: idRef.current++,
       isDone: false,
       content: content,
       date: new Date().getTime(),
     };
 
-    setTodo([newTodo, ...todo]);
+    setTodos([newTodo, ...todos]);
   };
 
   return (
