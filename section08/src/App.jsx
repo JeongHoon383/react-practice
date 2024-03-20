@@ -45,6 +45,13 @@ const mockData = [
 // 10. 추가 버튼을 눌렀을 때 input 안에 있는 값이 비워지게
 // 11. input 폼에서 엔터를 눌렀을 때 추가가 되게
 
+// 생성한 todo 화면에 랜더링 하기
+// state에 있는 todos를 list 컴포넌트에 props로 전달
+// Todoitem으로 props 전달 map 함수 사용
+// 검색어 기능 구현 : 검색어를 담는 state 및 이벤트 핸들러 생성
+// 검색어 구현 함수 생성
+//
+
 function App() {
   const [todos, setTodos] = useState(mockData);
   const idRef = useRef(3);
@@ -62,11 +69,23 @@ function App() {
     setTodos([newTodo, ...todos]);
   };
 
+  const onUpdate = (targetId) => {
+    // todos State 값들 중에
+    // targetId와 일치하는 id를 갖는 투두 아이템의 isDone을 변경
+
+    // 인수 : todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
+    setTodos(
+      todos.map((todo) => {
+        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo;
+      })
+    );
+  };
+
   return (
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} onUpdate={onUpdate} />
     </div>
   );
 }

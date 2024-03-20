@@ -10,8 +10,7 @@ import { useRef, useState } from "react";
 // 엔터키를 눌렀을 때 추가 버튼이 클릭되게
 
 // todo 아이템 추가하기 순서
-// 1. editor 컴포넌트에서 받아온 데이터를 useState에 저장
-//
+// 1. todo를 저장해줄 state 만들어주기
 
 const mockData = [
   {
@@ -41,7 +40,7 @@ function App() {
     <div className="flex flex-col w-[500px] m-auto gap-[20px] mt-[20px]">
       <Header />
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} />
     </div>
   );
 }

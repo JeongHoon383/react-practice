@@ -1,11 +1,11 @@
 import React from "react";
 
-const ListItem = () => {
+const ListItem = ({ id, isDone, content, date }) => {
   return (
     <div className="flex gap-[20px] pb-[20px] border-b border-gray-400">
-      <input type="checkbox" />
-      <div className="flex-1">Todo..</div>
-      <div className="text-red-300">Date</div>
+      <input readOnly checked={isDone} type="checkbox" />
+      <div className="flex-1">{content}</div>
+      <div className="text-red-300">{new Date(date).toLocaleDateString()}</div>
       <div>삭제</div>
     </div>
   );

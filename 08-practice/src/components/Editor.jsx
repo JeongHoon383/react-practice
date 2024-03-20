@@ -8,13 +8,7 @@ const Editor = ({ onCreate }) => {
     setContent(e.target.value);
   };
 
-  const onkeyDown = (e) => {
-    if (e.keyCode === 13) {
-      onClickChange();
-    }
-  };
-
-  const onClickChange = () => {
+  const onChangeClick = () => {
     if (content === "") {
       alert("값을 입력 해주세요");
       contentRef.current.focus();
@@ -25,18 +19,24 @@ const Editor = ({ onCreate }) => {
     setContent("");
   };
 
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onChangeClick();
+    }
+  };
+
   return (
     <div className="flex gap-[10px]">
       <input
-        onKeyDown={onkeyDown}
+        onKeyDown={onKeyDown}
+        ref={contentRef}
         value={content}
         onChange={onChangeContent}
-        ref={contentRef}
         placeholder="새로운 Todo..."
         className="flex-1 p-[10px] border-[1px] border-solid border-gray-400 rounded-[5px]"
       />
       <button
-        onClick={onClickChange}
+        onClick={onChangeClick}
         className="w-[80px] bg-lime-300 border-none rounded-[5px] text-white cursor-pointer"
       >
         추가
