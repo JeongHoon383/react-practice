@@ -6,6 +6,8 @@ const TodoItem = ({ id, isDone, content, date, onUpdate }) => {
     onUpdate(id);
   };
 
+  console.log(id);
+
   return (
     <div className="TodoItem">
       <input

@@ -52,6 +52,10 @@ const mockData = [
 // 검색어 구현 함수 생성
 //
 
+// todo 수정하기
+// 렌더링된 todo item 체크박스 클릭시 isDone 이 true로 되게 토글기능 구현
+//
+
 function App() {
   const [todos, setTodos] = useState(mockData);
   const idRef = useRef(3);
@@ -72,14 +76,17 @@ function App() {
   const onUpdate = (targetId) => {
     // todos State 값들 중에
     // targetId와 일치하는 id를 갖는 투두 아이템의 isDone을 변경
+    // 어떤 item을 선택하는지 알려줘야됨, id 값으로 설정
 
     // 인수 : todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
     setTodos(
-      todos.map((todo) => {
-        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo;
-      })
+      todos.map((todo) =>
+        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
+      )
     );
   };
+  // () => {} 화살표 함수 사용시 주의할 점
+  // ()
 
   return (
     <div className="App">
