@@ -8,20 +8,19 @@ const Editor = ({ onCreate }) => {
     setContent(e.target.value);
   };
 
-  const onChangeClick = () => {
+  const onSubmit = () => {
     if (content === "") {
-      alert("값을 입력 해주세요");
       contentRef.current.focus();
       return;
     }
     onCreate(content);
-    alert("추가 되었습니다.");
     setContent("");
   };
 
   const onKeyDown = (e) => {
-    if (e.key === "Enter") {
-      onChangeClick();
+    if (e.keyCode === 13) {
+      onSubmit();
+      alert("추가 되었습니다.");
     }
   };
 
@@ -30,13 +29,13 @@ const Editor = ({ onCreate }) => {
       <input
         onKeyDown={onKeyDown}
         ref={contentRef}
-        value={content}
         onChange={onChangeContent}
+        value={content}
         placeholder="새로운 Todo..."
         className="flex-1 p-[10px] border-[1px] border-solid border-gray-400 rounded-[5px]"
       />
       <button
-        onClick={onChangeClick}
+        onClick={onSubmit}
         className="w-[80px] bg-lime-300 border-none rounded-[5px] text-white cursor-pointer"
       >
         추가

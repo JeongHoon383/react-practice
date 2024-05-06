@@ -1,12 +1,14 @@
 import React from "react";
 import "./TodoItem.css";
 
-const TodoItem = ({ id, isDone, content, date, onUpdate }) => {
+const TodoItem = ({ id, isDone, content, date, onUpdate, onDelete }) => {
   const onChangeCheckbox = () => {
     onUpdate(id);
   };
 
-  console.log(id);
+  const onClickDeleteButton = () => {
+    onDelete(id);
+  };
 
   return (
     <div className="TodoItem">
@@ -18,7 +20,7 @@ const TodoItem = ({ id, isDone, content, date, onUpdate }) => {
       />
       <div className="content">{content}</div>
       <div className="date">{new Date(date).toLocaleDateString()}</div>
-      <div>삭제</div>
+      <button onClick={onClickDeleteButton}>삭제</button>
     </div>
   );
 };

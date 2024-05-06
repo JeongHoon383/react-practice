@@ -16,14 +16,20 @@ const mockData = [
   {
     id: 0,
     isDone: false,
-    content: "todo 연습하기",
+    content: "해위 난 정훈",
+    date: new Date().getTime(),
+  },
+  {
+    id: 1,
+    isDone: false,
+    content: "해위 난 정훈정훈",
     date: new Date().getTime(),
   },
 ];
 
 function App() {
   const [todos, setTodos] = useState(mockData);
-  const idRef = useRef(1);
+  const idRef = useRef(2);
 
   const onCreate = (content) => {
     const newTodo = {
@@ -36,19 +42,11 @@ function App() {
     setTodos([newTodo, ...todos]);
   };
 
-  const onUpdate = (targetId) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
-      )
-    );
-  };
-
   return (
     <div className="flex flex-col w-[500px] m-auto gap-[20px] mt-[20px]">
       <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} />
+      <List todos={todos} />
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 // 3. todo 삭제
 // 4. todo 검색
 // 5. todo 체크
+// 6. todo 삭제
 
 const mockData = [
   {
@@ -88,11 +89,16 @@ function App() {
   // () => {} 화살표 함수 사용시 주의할 점
   // ()
 
+  const onDelete = (targetId) => {
+    // 인수 : todos 배열에서 targetID와 일치하는 id를 갖는 요소만 삭제한 새로운 배열
+    setTodos(todos.filter((todo) => todo.id !== targetId));
+  };
+
   return (
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }
