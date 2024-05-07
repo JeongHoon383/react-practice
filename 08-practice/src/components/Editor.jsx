@@ -8,7 +8,7 @@ const Editor = ({ onCreate }) => {
     setContent(e.target.value);
   };
 
-  const onSubmit = () => {
+  const onClickButtonContent = () => {
     if (content === "") {
       contentRef.current.focus();
       return;
@@ -19,23 +19,22 @@ const Editor = ({ onCreate }) => {
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
-      onSubmit();
-      alert("추가 되었습니다.");
+      onClickButtonContent();
     }
   };
 
   return (
     <div className="flex gap-[10px]">
       <input
-        onKeyDown={onKeyDown}
         ref={contentRef}
-        onChange={onChangeContent}
         value={content}
+        onChange={onChangeContent}
+        onKeyDown={onKeyDown}
         placeholder="새로운 Todo..."
         className="flex-1 p-[10px] border-[1px] border-solid border-gray-400 rounded-[5px]"
       />
       <button
-        onClick={onSubmit}
+        onClick={onClickButtonContent}
         className="w-[80px] bg-lime-300 border-none rounded-[5px] text-white cursor-pointer"
       >
         추가

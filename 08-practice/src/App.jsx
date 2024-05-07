@@ -10,7 +10,10 @@ import { useRef, useState } from "react";
 // 엔터키를 눌렀을 때 추가 버튼이 클릭되게
 
 // todo 아이템 추가하기 순서
-// 1. todo를 저장해줄 state 만들어주기
+// 1. todo 생성
+// 2. 검색 기능
+// 3. 생성시 엔터키 눌렀을때 생성
+// 4. 중복 허용 x
 
 const mockData = [
   {
@@ -42,11 +45,23 @@ function App() {
     setTodos([newTodo, ...todos]);
   };
 
+  const onUpdate = (targetId) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
+  };
+
+  const onDelete = (targetId) => {
+    setTodos(todos.filter((todo) => todo.id !== targetId));
+  };
+
   return (
     <div className="flex flex-col w-[500px] m-auto gap-[20px] mt-[20px]">
       <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }
