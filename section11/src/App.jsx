@@ -2,7 +2,14 @@ import "./App.css";
 import Header from "./components/Header";
 import Editor from "./components/Editor";
 import List from "./components/List";
-import { useReducer, useRef, useState, useCallback } from "react";
+import {
+  useReducer,
+  useRef,
+  useState,
+  useCallback,
+  createContext,
+  useMemo,
+} from "react";
 
 const mockData = [
   {
@@ -40,6 +47,9 @@ function reducer(state, action) {
   }
 }
 
+export const TodoStateContext = createContext();
+export const TodoDispatchContext = createContext();
+
 function App() {
   // const [todos, setTodos] = useState(mockData);
   const [todos, dispatch] = useReducer(reducer, mockData);
@@ -72,19 +82,27 @@ function App() {
   }, []);
   // mount 될때만 최초 1회 생성, 생성된 이후로는 리렌더링이 되지 않음
 
+  const memoizedDispatch = useMemo(() => {
+    return {
+      onCreate,
+      onUpdate,
+      onDelete,
+    };
+  }, []);
+  // useMemo를 사용하여 리렌더링을 방지
+
   return (
     <div className="App">
       <Header />
-      value=
-      {{
-        todos,
-        onCreate,
-        onUpdate,
-        onDelete,
-      }}
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext value={memoizedDispatch}>
+          <Editor />
+          <List />
+        </TodoDispatchContext>
+      </TodoStateContext.Provider>
     </div>
+    // TodoContext로 감싸줌으로써 todos, onCreate, onUpdate, onDelete
+    // 데이터를 TodoContext에서 한꺼번에 공급받음
   );
 }
 
